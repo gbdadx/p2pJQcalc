@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculadora</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 95%;
+            height: 95%;
+        }
+        
+        header {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(241, 182, 109);
+            margin: auto;
+            margin-bottom: 1%;
+            padding: 10px;
+            height: 15%;
+        }
+        
+        article {
+            background-color: lightsalmon;
+            width: 70%;
+            margin: auto;
+            margin-bottom: 1%;
+            border: solid;
+            border-color: black;
+            border-style: dashed;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        label {
+            font-size: 1.5rem;
+        }
+        
+        button {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("h1").html("Buenos días, bienvenido a la calculadora de <i>Gabriela B. Diaz</i>");
+            $("#n1").on("click", function() {
+                $("#n1").val('');
+            }); /*cuando hace click en el cajetin, se borra el contenido*/
+            $("#n2").on("click", function() {
+                $("#n2").val('');
+            });
+            $("#n3").on("click", function() {
+                $("#n3").val('');
+            });
+            $("#n4").on("click", function() {
+                $("#n4").val('');
+            });
+
+            /**cuando hace click en el boton b1, calcula el cuadrado */
+            var num = $("#n1");
+            $("#b1").on("click", function() {
+                num.val(num.val() * num.val());
+            });
+            /**cuando hace click en el boton b2, calcula y muestra inverso */
+            $("#b2").on("click", function() {
+                num.val(1 / num.val());
+            });
+            /**cuando hace click en el boton b1, calcula y muestra raiz cuadrada*/
+            $("#b3").on("click", function() {
+                num.val(Math.sqrt(num.val()));
+            });
+            /**cuando hace click en el boton b1, calcula y muestra parte entera */
+            $("#b4").on("click", function() {
+                num.val((num.val() > 0) ? Math.floor(num.val()) : Math.ceil(num.val()));
+            });
+            /**cuando hace click en el boton b1, calcula y muestra 2 a la x*/
+            $("#b5").on("click", function() {
+                num.val(Math.pow(2, num.val()));
+            });
+            /**cuando hace click en el boton b1, calcula y muestra factorial */
+            $("#b6").on("click", function() {
+                var st = num.length;
+                for (let i = 0; i < st; i++) {
+                    num.val() += +num[i];
+                }
+            });
+            ////////binarias
+            var num1 = $("#n2");
+            var num2 = $("#n3");
+            var res1 = $("#r1");
+            $("#b10").on("click", function() {
+
+                res1.val(num1.val() + num2.val());
+            });
+            $("#b11").on("click", function() {
+                res1.val(num1.val() - num2.val());
+            });
+            $("#b12").on("click", function() {
+                res1.val(num1.val() * num2.val());
+            });
+            $("#b13").on("click", function() {
+                res1.val(num1.val() / num2.val());
+            });
+            $("#b14").on("click", function() {
+                res1.val(Math.pow(num1.val(), num2.val()));
+            });
+            ///////csv
+
+
+            $("#b20").on("click", function() {
+                var num4 = document.getElementById("n4");
+                var res2 = $("#r2");
+                var acc = 0;
+                var lista = num4.value.split(',');
+                for (let i = 0; i < lista.length; i++) {
+                    acc += +lista[i];
+                    res2.val(acc);
+                }
+            });
+
+            $("#b21").on("click", function() {
+                var num4 = document.getElementById("n4");
+                var res2 = $("#r2");
+                var acc = 1;
+                var lista = num4.value.split(',');
+                for (let i = 0; i < lista.length; i++) {
+                    acc = acc * +lista[i];
+                    res2.val(acc);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1 id="bienvenida">Calculadora</h1>
+    </header>
+
+
+    <article>
+        <!--1) Operaciones unitarias (con un solo operando): -->
+        <h2>Operaciones unitarias (con un solo operando): </h2> Número:
+        <input type="text" id="n1"><br>
+        <button id="b1" class="one"> x^2 </button>
+        <!-- x^2 (número elevado al cuadrado)-->
+
+        <button id="b2" class="one"> 1/x </button>
+        <!-- 1/x (inverso del número)-->
+
+        <button id="b3" class="one"> sqrt(x) </button>
+        <!-- sqrt(x) (raiz cuadrada del número)-->
+        <button id="b4" class="one"> parte_entera(x) </button>
+        <!-- parte_entera(x) (parte entera de 
+    x: si x es positivo devuelve Math.floor(x) y si es negativo devuelve -Math.ceil(x))-->
+
+        <button id="b5" class="one"> 2^n </button>
+        <!-- 2^n (potencia n del número 2)-->
+
+        <button id="b6" class="one"> factorial x </button>
+        <!--n! (factorial del número n: n*(n-1)*(n-2)*...*3*2*1) -->
+
+    </article>
+    <article>
+        <!--2)Operaciones binarias (con dos operandos):-->
+
+        <h2>Operaciones binarias (con dos operandos): </h2>
+        Número 1: <input id="n2" type="text" /> Número 2: <input id="n3" type="text" /> <br>
+        <!-- suma-->
+        <button id="b10" class="two"> x + y </button>
+        <!-- resta-->
+        <button id="b11" class="two"> x - y </button>
+        <!-- multiplicacion-->
+        <button id="b12" class="two"> x * y </button>
+        <!-- division-->
+        <button id="b13" class="two"> x / y </button>
+        <!-- multiplicacion-->
+        <button id="b14" class="two"> x ^ y </button>
+        <br>
+        <label for="r1">Resultado:</label> <input type="number" id="r1"><br>
+    </article>
+    <article>
+        <!--3) Operaciones con n operandos introducidos en formato CSV:-->
+        <h2>Operaciones con n operandos introducidos en formato CSV: </h2>
+        Números: <input id="n4" type="text" />
+
+        <button id="b20" class="lot"> x+ ...xn </button>
+        <!-- sumatorio(x) (sumatorio de n números)-->
+
+        <button id="b21" class="lot"> x*..xn </button> <br>
+        <!-- producto(x) (producto de n números)-->
+        <label for="r2">Resultado:</label> <input type="number" id="r2"><br>
+
+    </article>
+
+
+</body>
+
+</html>
